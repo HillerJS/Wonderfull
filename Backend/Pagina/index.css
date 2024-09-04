@@ -1,0 +1,30 @@
+/* body {
+    background-color: #2196f3;
+} */
+.item{
+    border:solid 1px #ebebeb;
+    width: 20%;
+    float: left;
+    margin-bottom: 5px;
+    padding: 9px;
+    border-radius: 11px;
+    background: #2196f3;
+}
+
+.mititulo {
+    color: white;
+}
+
+.midescripcion {
+    font-style: italic;
+    color: white;
+    margin-top: 9px;
+    margin-bottom: 5px;  
+}
+#miregistro {
+    width: 375px;
+    background: #8bc34a;
+    padding: 34px;
+    margin-left: calc(50% - 180px);
+    margin-top: 15px;
+}
