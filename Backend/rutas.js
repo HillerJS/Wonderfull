@@ -26,7 +26,8 @@ app.post("/usuarios/login", function(requests,response){
 
 app.post("/usuarios/activarCuenta", function(requests,response){
     usuariosController.ActivarCuenta(requests,response)
-}) // Es get porque estos dos datos van a ser enviados por medio de una url, que el usuario solamente le de click y listo, lo mande a la zona donde se pueda loguear
+}) // Es get porque estos dos datos van a ser enviados por medio de una url, 
+// que el usuario solamente le de click y listo, lo mande a la zona donde se pueda loguear
 
 app.post("/usuarios/actualizarPass", function(requests,response){
     usuariosController.ActualizarPass(requests,response)

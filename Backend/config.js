@@ -12,6 +12,7 @@ config.encriptado = 'hilla384@xOolHFLEh07PJGoPkLv1IbSaacEPsjñonjuwe6432168455%&
 config.origins = [
     'http://localhost:4200'
 ]
+config.tiempoSesion = '2m'
 // config.puerto = 3000 esto es el puerto 3000
 // Pero para poder usar este archivo o vincularlo para hacer uso de esta variable debo exportar esta información y para exportar en node se usa module.exports.config = config  aqui estaremos exportando todas las configuraciones que se almacenen en var config
 config.email.host = "smtp.gmail.com" // el correo electrónico que se va a implementar para hacer envio de correos electronicos

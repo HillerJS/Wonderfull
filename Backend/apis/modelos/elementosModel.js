@@ -74,6 +74,7 @@ elementosModel.ListarId             = function(post, callback){
 elementosModel.Actualizar           = function(post, callback){
     MyModel.findOneAndUpdate({_id:post._id},{
         nombre:post.nombre,
+        codigo:post.codigo,
         color:post.color,
         precio:post.precio,
         descripcion:post.descripcion,

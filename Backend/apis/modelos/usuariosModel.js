@@ -8,7 +8,8 @@ var usuariosSchema = new Schema({
     password:String,
     rol:String,
     estado:String,
-    codigoAleatorio:String
+    codigoAleatorio:String,
+    rol:String
 })
 
 const MyModel = mongoose.model("usuarios", usuariosSchema)
@@ -29,6 +30,7 @@ usuariosModel.Guardar       = function(post, callback){
     instancia.rol = "cliente"
     instancia.estado = "0"
     instancia.codigoAleatorio = post.codigoAleatorio
+    instancia.rol = "Cliente"
 
     instancia.save().then((respuesta) => {
         console.log(respuesta)
@@ -130,7 +132,11 @@ usuariosModel.Login         = function(post, callback){
     MyModel.find({email:post.email, password:post.password, estado:'1'},{}).then((respuesta) => {
         if(respuesta.length == 1){
             console.log(respuesta)
-            return callback({state:true, mensaje: "Bienvenido: " + respuesta[0].nombre})
+            return callback({state:true, mensaje: "Bienvenido: " + respuesta[0].nombre,
+                nombre:respuesta[0].nombre,
+                email:respuesta[0].email,
+                rol:respuesta[0].rol,
+            })
         }
         else{
             return callback({state: false, mensaje: "Credenciales inválidas, verifique que su cuenta esté activa"})

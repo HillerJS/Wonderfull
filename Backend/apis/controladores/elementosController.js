@@ -86,6 +86,7 @@ elementosController.Actualizar  = function(request, response){
     var post = {
         _id: request.body._id,
         nombre: request.body.nombre,
+        codigo:request.body.codigo,
         color: request.body.color,
         precio: request.body.precio,
         descripcion: request.body.descripcion,
@@ -123,6 +124,10 @@ elementosController.Actualizar  = function(request, response){
     }
     if(post.categoria == undefined || post.categoria == null || post.categoria == ""){
         response.json({state:false, mensaje:"categoria es un campo obligatorio"})
+        return false
+    }
+    if(post.codigo == undefined || post.codigo == null || post.codigo == ""){
+        response.json({state:false, mensaje:"codigo es un campo obligatorio"})
         return false
     }
     elementosModel.Actualizar(post, function(saved){

@@ -44,16 +44,13 @@ usuariosController.Guardar = function(requests, response){
         return false
     }
     
-
     // usuariosModel.Guardar(post,function(respuestaModelo){
     //     response.json(respuestaModelo)
     // })
     // response.json({state: true, mensaje: "Sus datos son válidos"})
     post.password = SHA256(post.password + config.encriptado)
-
         usuariosModel.verificarEmail(post, function(verif){
             if(verif.continuar =="Si"){
-
                 post.codigoAleatorio = "WonderFull- " + Math.floor(Math.random()* (9999 - 1000) + 1000);
                 // enviar correo electrónico - configuracion establecida por google
                 const transporter = nodemailer.createTransport({
@@ -125,8 +122,6 @@ usuariosController.Guardar = function(requests, response){
                         console.log(info)
                     }
                 })
-
-
                 usuariosModel.Guardar(post,function(respuestaModelo){
                     response.json(respuestaModelo)
                 })
@@ -249,6 +244,15 @@ usuariosController.Login = function(requests, response){
     post.password = SHA256(post.password + config.encriptado)
     
     usuariosModel.Login(post, function(respuesta){
+        if(respuesta.state == true){
+            var payload = {
+                nombre:respuesta.nombre,
+                email:respuesta.email,
+                rol:respuesta.rol
+            }
+            const token = jwt.sign(payload, config.encriptado, {expiresIn:config.tiempoSesion})
+        }
+
         response.json(respuesta)
     })
 
@@ -272,8 +276,6 @@ usuariosController.ActivarCuenta = function(requests, response){
     usuariosModel.ActivarCuenta(post, function(respuesta){
         response.json(respuesta)
     })
-
-
 }
 
 usuariosController.ActualizarPass = function(requests, response){
