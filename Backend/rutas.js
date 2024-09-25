@@ -33,6 +33,9 @@ app.post("/usuarios/actualizarPass", function(requests,response){
     usuariosController.ActualizarPass(requests,response)
 })
 
+app.post("/usuarios/state", function(requests,response){
+    usuariosController.State(requests,response)
+})
 
 var productosController = require("./apis/controladores/productosController.js").productosController
 

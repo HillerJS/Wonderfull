@@ -136,6 +136,7 @@ usuariosModel.Login         = function(post, callback){
                 nombre:respuesta[0].nombre,
                 email:respuesta[0].email,
                 rol:respuesta[0].rol,
+                _id:respuesta[0]._id,
             })
         }
         else{
@@ -171,8 +172,6 @@ usuariosModel.ActivarCuenta    = function(post, callback){
         return callback({state: false, error:error})
     })
 }
-
-
 usuariosModel.ActualizarPass = function(post, callback){
     MyModel.findOneAndUpdate({email:post.email},{
         password:post.password

@@ -43,7 +43,6 @@ usuariosController.Guardar = function(requests, response){
         response.json({state: false, mensaje:"El campo password debe contener al menos 2 dígitos, una mayúscula y debe ser longitud mínima de 6"})
         return false
     }
-    
     // usuariosModel.Guardar(post,function(respuestaModelo){
     //     response.json(respuestaModelo)
     // })
@@ -244,21 +243,20 @@ usuariosController.Login = function(requests, response){
     post.password = SHA256(post.password + config.encriptado)
     
     usuariosModel.Login(post, function(respuesta){
+        respuesta.token = ''
         if(respuesta.state == true){
             var payload = {
                 nombre:respuesta.nombre,
                 email:respuesta.email,
-                rol:respuesta.rol
+                rol:respuesta.rol,
+                _id:respuesta._id
             }
             const token = jwt.sign(payload, config.encriptado, {expiresIn:config.tiempoSesion})
+            respuesta.token = token
         }
-
         response.json(respuesta)
     })
-
-
 }
-
 usuariosController.ActivarCuenta = function(requests, response){
     var post = {
         email:requests.body.email,
@@ -272,7 +270,6 @@ usuariosController.ActivarCuenta = function(requests, response){
         response.json({state:false, mensaje:"El campo codigoAleatorio es obligatorio"})
         return false
     }
-    
     usuariosModel.ActivarCuenta(post, function(respuesta){
         response.json(respuesta)
     })
@@ -310,6 +307,10 @@ usuariosController.ActualizarPass = function(requests, response){
         }
     })
 
+}
+usuariosController.State          = function(request, response){
+    var token = request.headers.autorization.split(" ")[1].trim()
+    response.json({miToken:token})
 }
 
 module.exports.usuariosController = usuariosController
